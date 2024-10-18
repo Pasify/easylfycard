@@ -2,14 +2,14 @@ import { test as testAPI } from "../../api/hello";
 import initializeDD from "../services/initDD";
 
 function Button() {
-  const test = () => {
+  const testCase = () => {
     // initializeDD();
     testAPI(); // Call the API function here
     console.log(`working`);
   };
   return (
     <div>
-      <button onClick={test}>test</button>
+      <button onClick={testCase}>test</button>
     </div>
   );
 }
