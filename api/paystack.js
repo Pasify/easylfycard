@@ -1,9 +1,8 @@
 import https from "https";
-import { env } from "process";
+// import { env } from "process";
 
+const KEY = process.env.VITE_PAYSTACK_PUBLIC_KEY;
 export default function initializePayment(req, res) {
-  const KEY = env.VITE_PAYSTACK_PUBLIC_KEY;
-
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");

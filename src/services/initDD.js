@@ -7,15 +7,9 @@ async function initializeDD() {
     const response = await axios.post(
       "https://easylyfcard.vercel.app/api/paystack",
       {
-        email: "jeyasoy633@kunsum.com",
+        email: "ifesinachiobiora73@gmail.com",
         channel: "direct_debit",
         callback_url: "https://easylyfcard.vercel.app/api/payment-cb",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${KEY}`, // Securely use secret key
-          "Content-Type": "application/json",
-        },
       }
     );
     console.log("Payment Initialized:", response.data);
