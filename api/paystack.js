@@ -17,7 +17,7 @@ export default function initializePayment(req, res) {
 
   // Your existing logic for handling the POST request
   // Example: interacting with the Paystack API
-  res.status(200).json({ message: "CORS headers added!" });
+  //   res.status(200).json({ message: "CORS headers added!" });
 
   const params = JSON.stringify({
     email: req.body.email,
