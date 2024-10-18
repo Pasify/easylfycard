@@ -12,10 +12,10 @@ async function initializeDirectDebit() {
         callback_url: "https://easylyfcard.vercel.app/api/payment-cb",
       },
       {
-        headers: {
-          Authorization: `Bearer ${KEY}`,
-          "Content-Type": "application/json",
-        },
+        // headers: {
+        //   Authorization: `Bearer ${KEY}`,
+        //   "Content-Type": "application/json",
+        // },
       }
     );
     console.log("Payment Initialized:", response.data);
