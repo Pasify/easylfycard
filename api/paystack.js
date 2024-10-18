@@ -3,6 +3,22 @@ import { env } from "process";
 
 export default function initializePayment(req, res) {
   const KEY = env.VITE_PAYSTACK_PUBLIC_KEY;
+
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    // Preflight request for CORS
+    res.status(200).end();
+    return;
+  }
+
+  // Your existing logic for handling the POST request
+  // Example: interacting with the Paystack API
+  res.status(200).json({ message: "CORS headers added!" });
+
   const params = JSON.stringify({
     email: req.body.email,
     channel: req.body.channel,
