@@ -1,4 +1,4 @@
-import { test as testAPI } from "../../api/hello";
+import testAPI from "../../api/hello";
 import initializeDD from "../services/initDD";
 
 function Button() {
