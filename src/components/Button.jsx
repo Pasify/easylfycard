@@ -4,9 +4,7 @@ import handler from "../services/sayhello";
 
 function Button() {
   const testCase = () => {
-    // initializeDD();
-    handler();
-    // testAPI(); // Call the API function here
+    initializeDD();
     console.log(`working`);
   };
   return (
