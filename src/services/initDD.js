@@ -13,6 +13,7 @@ async function initializeDirectDebit() {
       },
       {
         headers: {
+          Authorization: `Bearer ${KEY}`,
           "Content-Type": "application/json",
         },
       }

@@ -6,7 +6,11 @@ export default function initializePayment(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type",
+    "Authorization"
+  );
 
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
