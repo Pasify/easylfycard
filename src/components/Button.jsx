@@ -1,10 +1,12 @@
 import testAPI from "../../api/hello";
 import initializeDD from "../services/initDD";
+import handler from "../services/sayhello";
 
 function Button() {
   const testCase = () => {
     // initializeDD();
-    testAPI(); // Call the API function here
+    handler();
+    // testAPI(); // Call the API function here
     console.log(`working`);
   };
   return (

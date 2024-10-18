@@ -1,3 +1,3 @@
-export default function testAPI(res, req) {
+export default function testAPI(req, res) {
   res.status(200).json({ message: "Hello, EasylyfCard!" });
 }

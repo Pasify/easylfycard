@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default function handler() {
+export default async function handler() {
   try {
-    const res = axios.get("/api/hello");
+    const res = await axios.get("/api/hello.js");
     console.log(res.data);
   } catch (error) {}
 }
