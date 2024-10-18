@@ -1,8 +1,8 @@
 import axios from "axios";
 // import { env } from "process";
 
-const KEY = import.meta.VITE_PAYSTACK_PUBLIC_KEY;
-async function initializeDD() {
+const KEY = import.meta.VITE_PAYSTACK_TEST_SECRETE_KEY;
+async function initializeDirectDebit() {
   try {
     const response = await axios.post(
       "https://easylyfcard.vercel.app/api/paystack",
@@ -10,6 +10,11 @@ async function initializeDD() {
         email: "ifesinachiobiora73@gmail.com",
         channel: "direct_debit",
         callback_url: "https://easylyfcard.vercel.app/api/payment-cb",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     console.log("Payment Initialized:", response.data);
@@ -18,4 +23,4 @@ async function initializeDD() {
     console.log(err);
   }
 }
-export default initializeDD;
+export default initializeDirectDebit;

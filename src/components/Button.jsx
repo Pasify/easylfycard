@@ -1,10 +1,10 @@
 import testAPI from "../../api/hello";
-import initializeDD from "../services/initDD";
+import initializeDirectDebit from "../services/initDD";
 import handler from "../services/sayhello";
 
 function Button() {
   const testCase = () => {
-    initializeDD();
+    initializeDirectDebit();
     console.log(`working`);
   };
   return (
