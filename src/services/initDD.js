@@ -3,7 +3,7 @@ import axios from "axios";
 async function initializeDD() {
   try {
     const response = await axios.post(
-      "https://easylyfcard.vercel.app/api//paystack",
+      "https://easylyfcard.vercel.app/api/paystack",
       {
         email: "jeyasoy633@kunsum.com",
         channel: "direct_debit",
