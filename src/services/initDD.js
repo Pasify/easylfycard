@@ -1,6 +1,7 @@
 import axios from "axios";
+// import { env } from "process";
 
-const KEY = env.VITE_PAYSTACK_PUBLIC_KEY;
+const KEY = import.meta.VITE_PAYSTACK_PUBLIC_KEY;
 async function initializeDD() {
   try {
     const response = await axios.post(
