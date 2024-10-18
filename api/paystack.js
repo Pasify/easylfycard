@@ -3,18 +3,10 @@ import https from "https";
 
 const KEY = process.env.VITE_PAYSTACK_TEST_SECRETE_KEY;
 export default function initializePayment(req, res) {
-  if (!KEY) {
-    res.status(500).json({ error: "Paystack secret key not found." });
-    return;
-  }
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type",
-    "Authorization"
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
