@@ -7,7 +7,7 @@ async function initializeDD() {
       {
         email: "jeyasoy633@kunsum.com",
         channel: "direct_debit",
-        callback_url: "https://easylyfcard.vercel.app/api/payment-callback",
+        callback_url: "https://easylyfcard.vercel.app/api/payment-cb",
       }
     );
     console.log("Payment Initialized:", response.data);

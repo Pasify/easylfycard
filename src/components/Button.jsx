@@ -1,9 +1,10 @@
-import test from "../../api/hello";
+import { test as testAPI } from "../../api/hello";
 import initializeDD from "../services/initDD";
 
 function Button() {
   const test = () => {
-    initializeDD();
+    // initializeDD();
+    testAPI(); // Call the API function here
     console.log(`working`);
   };
   return (
