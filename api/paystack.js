@@ -1,5 +1,5 @@
 import https from "https";
-// import { env } from "process";
+import process from "process";
 
 export default function initializePayment(req, res) {
   const KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
