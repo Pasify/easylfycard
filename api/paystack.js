@@ -2,7 +2,7 @@ import https from "https";
 // import { env } from "process";
 
 export default function initializePayment(req, res) {
-  const KEY = `sk_test_91eba077bad5c87c3346c70803b7d3150f371bdc`;
+  const KEY = process.env.PAYSTACK_TEST_SECRET_KEY;
   console.log(`Paystack Secret Key:`, KEY);
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
