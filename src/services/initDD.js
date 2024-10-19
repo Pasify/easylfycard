@@ -1,7 +1,7 @@
 import axios from "axios";
 // import { env } from "process";
 
-const KEY = import.meta.env.VITE_PAYSTACK_TEST_SECRETE_KEY;
+const KEY = import.meta.env.VITE_PAYSTACK_TEST_SECRET_KEY;
 
 async function initializeDirectDebit() {
   try {

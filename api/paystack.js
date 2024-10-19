@@ -1,7 +1,8 @@
 import https from "https";
 // import { env } from "process";
 
-const KEY = process.env.VITE_PAYSTACK_TEST_SECRETE_KEY;
+const KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+console.log(`Paystack Secret Key:`, KEY);
 export default function initializePayment(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
@@ -32,13 +33,18 @@ export default function initializePayment(req, res) {
     },
   };
 
+  // send request to paystack
   const paystackReq = https.request(options, (paystackRes) => {
     let data = "";
     paystackRes.on("data", (chunk) => (data += chunk));
-    paystackRes.on("end", () => res.json(JSON.parse(data)));
+    paystackRes.on("end", () => {
+      console.log("Paystack Response:", data); // Log Paystack response for debugging
+      res.json(JSON.parse(data));
+    });
   });
 
   paystackReq.on("error", (error) => {
+    console.error("Error with Paystack request:", error); // Log the error
     res.status(500).send(error);
   });
 
