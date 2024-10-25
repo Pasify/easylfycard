@@ -1,22 +1,18 @@
 import { Button } from "@material-tailwind/react";
-import testAPI from "../../api/hello";
-import initializeDirectDebit from "../services/initDD";
-import handler from "../services/sayhello";
+import Loader from "./Loader";
 
-function CustomButton() {
-  const testCase = () => {
-    initializeDirectDebit();
-    console.log(`working`);
-  };
+function CustomButton({ handleClick, isDisabled, isLoading }) {
   return (
     <div>
       <Button
         variant="gradient"
         color="green"
-        onClick={() => console.log("hek")}
         fullWidth
+        onClick={() => handleClick()}
+        type="submit"
+        disabled={isDisabled}
       >
-        Click Me
+        {isLoading ? <Loader /> : <span>Authorize</span>}
       </Button>
     </div>
   );
