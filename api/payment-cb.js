@@ -1,6 +1,7 @@
 import https from "https";
 export default async function handler(req, res) {
-  const { data } = req.body;
+  console.log(req);
+  const { data } = req?.body;
 
   try {
     // Log the entire request body to see exactly what Paystack is sending
