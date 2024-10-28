@@ -1,11 +1,12 @@
 import https from "https";
 export default async function handler(req, res) {
-  console.log(req);
-  const { data } = req?.body;
-
   try {
     // Log the entire request body to see exactly what Paystack is sending
     console.log("Received webhook data:", req.body);
+    const { data } = req?.body || {};
+    if (data) {
+      console.log(data);
+    }
 
     // Send a success response back to Paystack, acknowledging receipt of the webhook
     res.status(200).json({ message: "Webhook received successfully" });
