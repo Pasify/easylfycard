@@ -8,7 +8,7 @@ async function initializeDirectDebit(emailData) {
       {
         email: emailData,
         channel: "direct_debit",
-        callback_url: "https://easylyfcard.vercel.app/api/payment-cb",
+        callback_url: "https://easylyfcard.vercel.app/thank-you",
       }
     );
     if (response) {
