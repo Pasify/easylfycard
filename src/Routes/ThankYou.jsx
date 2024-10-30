@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-function AuthStatus() {
+function ThankYou() {
   const location = useLocation();
   //   const queryParam = new URLSearchParams(location.search);
   //   console.log(location);
@@ -14,4 +14,4 @@ function AuthStatus() {
   );
 }
 
-export default AuthStatus;
+export default ThankYou;

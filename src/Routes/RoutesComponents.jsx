@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import LoginCard from "../components/FormCard";
 import ErrorPage from "../pages/ErrorPage";
-import AuthStatus from "./AuthStatus";
+import ThankYou from "./ThankYou";
 
 const routes = [
   {
@@ -10,8 +10,8 @@ const routes = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "auth-status",
-    element: <AuthStatus />,
+    path: "thank-you",
+    element: <ThankYou />,
   },
 ];
 const router = createBrowserRouter(routes);
