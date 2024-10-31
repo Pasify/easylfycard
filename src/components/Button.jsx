@@ -1,18 +1,18 @@
 import { Button } from "@material-tailwind/react";
 import Loader from "./Loader";
 
-function CustomButton({ handleClick, isDisabled, isLoading }) {
+function CustomButton({ isDisabled, isLoading, ButtonText }) {
   return (
     <div>
       <Button
         variant="gradient"
         color="green"
         fullWidth
-        onClick={() => handleClick()}
+        // onClick={() => handleClick()}
         type="submit"
         disabled={isDisabled}
       >
-        {isLoading ? <Loader /> : <span>Authorize</span>}
+        {isLoading ? <Loader /> : <span>{ButtonText}</span>}
       </Button>
     </div>
   );

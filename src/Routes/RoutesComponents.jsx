@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginCard from "../components/FormCard";
 import ErrorPage from "../pages/ErrorPage";
 import ThankYou from "./ThankYou";
+import ChargeAccount from "../pages/ChargeAccount";
 
 const routes = [
   {
@@ -12,6 +13,10 @@ const routes = [
   {
     path: "thank-you",
     element: <ThankYou />,
+  },
+  {
+    path: "charge",
+    element: <ChargeAccount />,
   },
 ];
 const router = createBrowserRouter(routes);

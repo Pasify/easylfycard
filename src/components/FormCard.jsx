@@ -78,9 +78,10 @@ export default function LoginCard() {
         </CardBody>
         <CardFooter className="pt-0">
           <CustomButton
-            handleClick={onSubmitForm}
+            // handleClick={onSubmitForm}
             isDisabled={!isValid}
             isLoading={isLoading}
+            ButtonText="Authorize"
           />
         </CardFooter>
       </form>
