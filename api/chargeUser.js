@@ -7,13 +7,14 @@ export default function chargeUser(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
-  }
   if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
   }
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
+
   const params = JSON.stringify({
     authorization_code: req.body.authorization_code,
     email: req.body.email,

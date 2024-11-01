@@ -71,6 +71,7 @@ function ChargeAccount() {
 
           <div className="flex flex-col gap-2">
             <Input
+              defaultValue={100}
               label="Amount"
               size="lg"
               type="number"
