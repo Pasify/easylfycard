@@ -10,6 +10,10 @@ export default function chargeUser(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
   const params = JSON.stringify({
     authorization_code: req.body.authorization_code,
     email: req.body.email,

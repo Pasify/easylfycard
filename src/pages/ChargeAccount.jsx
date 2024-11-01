@@ -9,6 +9,7 @@ import {
 import CustomButton from "../components/Button";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import chargeAccount from "../services/chargeAccount";
 
 function ChargeAccount() {
   const {
@@ -19,8 +20,9 @@ function ChargeAccount() {
   } = useForm();
   const submitForm = (values) => {
     // Implement your logic to submit the form data here
-    console.log(values);
 
+    console.log(values);
+    chargeAccount(values);
     // reset();
   };
   useEffect(() => {
@@ -55,7 +57,7 @@ function ChargeAccount() {
                     "Authorization code must be at least 6 characters long",
                 },
               })}
-              // defaultValue="AUTH_rZXeIG72j0"
+              defaultValue="AUTH_rZXeIG72j0"
               containerProps={{
                 className: "caret-green-700 shadow-sm",
               }}
@@ -94,6 +96,7 @@ function ChargeAccount() {
 
           <div className="flex flex-col gap-2">
             <Input
+              defaultValue="ese.akposibruke@yahoo.com"
               label="Linked Email Address"
               {...register("email", {
                 required: "Email Address is required",
