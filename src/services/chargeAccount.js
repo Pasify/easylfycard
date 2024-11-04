@@ -11,10 +11,27 @@ export default async function chargeAccount(accountData) {
         authorization_code: authorization_code,
       }
     );
-    if (response) {
-      console.log(`response received: `, response);
+
+    if (response.data && response.data.type === "validation_error") {
+      // throw new Error(response.data.message);
+      return {
+        message: response.data.message,
+        success: false,
+        type: response.data.type,
+      };
     }
+    console.log(`response received: `, response);
+    return {
+      message: "Account charged successfully",
+      success: true,
+      data: response.data,
+    };
   } catch (error) {
     console.error("Error charging users account:", error);
+    return {
+      message: "An error occurred while charging the account",
+      success: false,
+      type: "network_error",
+    };
   }
 }

@@ -21,15 +21,31 @@ function ChargeAccount() {
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
   const submitForm = async (values) => {
-    // Implement your logic to submit the form data here
     const toastid = toast.loading("Debiting account...");
     console.log(values);
     setIsLoading(true);
     try {
-      await chargeAccount(values);
-      toast.success("Account debited successfully!", {
-        id: toastid,
-      });
+      const result = await chargeAccount(values);
+      if (result.success) {
+        toast.success("Account debited successfully!", {
+          id: toastid,
+        });
+      } else {
+        if (result.type === "validation_error") {
+          toast.error(`validation error, ${result.message}`, {
+            id: toastid,
+          });
+        } else if (result.type === "network_error") {
+          toast.error(
+            "Network Error: Unable to process request. Please try again.",
+            { id: toastid }
+          );
+        } else {
+          toast.error("An unknown error occurred. Please try again.", {
+            id: toastid,
+          });
+        }
+      }
     } catch (error) {
       toast.error("Failed to Debit Account, Please try again", {
         id: toastid,
@@ -71,7 +87,7 @@ function ChargeAccount() {
                     "Authorization code must be at least 6 characters long",
                 },
               })}
-              defaultValue="AUTH_rZXeIG72j0"
+              // defaultValue="AUTH_rZXeIG72j0"
               containerProps={{
                 className: "caret-green-700 shadow-sm",
               }}
@@ -85,7 +101,7 @@ function ChargeAccount() {
 
           <div className="flex flex-col gap-2">
             <Input
-              defaultValue={1000}
+              // defaultValue={1000}
               label="Amount"
               size="lg"
               type="number"
@@ -111,7 +127,7 @@ function ChargeAccount() {
 
           <div className="flex flex-col gap-2">
             <Input
-              defaultValue="ese.akposibruke@yahoo.com"
+              // defaultValue="ese.akposibruke@yahoo.com"
               label="Linked Email Address"
               {...register("email", {
                 required: "Email Address is required",
