@@ -52,8 +52,8 @@ function ChargeAccount() {
       });
     } finally {
       setIsLoading(false);
+      reset();
     }
-    // reset();
   };
   useEffect(() => {
     document.title = "Perform Debit";

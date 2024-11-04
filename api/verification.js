@@ -1,18 +1,27 @@
 import https from "https";
-import { env } from "process";
-export default function handler(req, res) {
-  // Check if the request method is POST
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+
+export default function verification(req, res) {
+  const TEST_KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const LIVE_KEY = process.env.VITE_PAYSTACK_LIVE;
+
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
   }
 
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
   // Extract the transaction reference from the request body
   const { reference } = req.body;
   if (!reference) {
     return res.status(400).json({ error: "Transaction reference is required" });
   }
-
-  const KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
 
   // Options for Paystack transaction verification
   const options = {
@@ -21,7 +30,7 @@ export default function handler(req, res) {
     path: `/transaction/verify/${reference}`,
     method: "GET",
     headers: {
-      Authorization: `Bearer ${KEY}`,
+      Authorization: `Bearer ${LIVE_KEY}`,
     },
   };
 

@@ -19,7 +19,7 @@ export default function chargeUser(req, res) {
   const params = JSON.stringify({
     authorization_code: req.body.authorization_code,
     email: req.body.email,
-    amount: req.body.amount * 100,
+    amount: req.body.amount * 100, //
     currency: "NGN",
   });
   const options = {

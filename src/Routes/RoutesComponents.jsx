@@ -3,6 +3,7 @@ import LoginCard from "../components/FormCard";
 import ErrorPage from "../pages/ErrorPage";
 import ThankYou from "./ThankYou";
 import ChargeAccount from "../pages/ChargeAccount";
+import VerifyTransaction from "../pages/VerifyTransaction";
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
   {
     path: "charge",
     element: <ChargeAccount />,
+  },
+  {
+    path: "verify",
+    element: <VerifyTransaction />,
   },
 ];
 const router = createBrowserRouter(routes);
