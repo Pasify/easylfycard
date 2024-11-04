@@ -2,7 +2,8 @@ import https from "https";
 // import { env } from "process";
 
 export default function initializePayment(req, res) {
-  const KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const TEST_KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const LIVE_KEY = process.env.VITE_PAYSTACK_LIVE;
 
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
@@ -28,7 +29,7 @@ export default function initializePayment(req, res) {
     path: "/customer/authorization/initialize",
     method: "POST",
     headers: {
-      Authorization: `Bearer ${KEY}`, //  secret key
+      Authorization: `Bearer ${LIVE_KEY}`, //  secret key
       "Content-Type": "application/json",
     },
   };

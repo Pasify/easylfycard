@@ -8,21 +8,35 @@ import {
 } from "@material-tailwind/react";
 import CustomButton from "../components/Button";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import chargeAccount from "../services/chargeAccount";
+import toast from "react-hot-toast";
 
 function ChargeAccount() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm();
-  const submitForm = (values) => {
+  } = useForm({ mode: "onChange" });
+  const submitForm = async (values) => {
     // Implement your logic to submit the form data here
-
+    const toastid = toast.loading("Debiting account...");
     console.log(values);
-    chargeAccount(values);
+    setIsLoading(true);
+    try {
+      await chargeAccount(values);
+      toast.success("Account debited successfully!", {
+        id: toastid,
+      });
+    } catch (error) {
+      toast.error("Failed to Debit Account, Please try again", {
+        id: toastid,
+      });
+    } finally {
+      setIsLoading(false);
+    }
     // reset();
   };
   useEffect(() => {
@@ -71,7 +85,7 @@ function ChargeAccount() {
 
           <div className="flex flex-col gap-2">
             <Input
-              defaultValue={100}
+              defaultValue={1000}
               label="Amount"
               size="lg"
               type="number"
@@ -116,7 +130,11 @@ function ChargeAccount() {
           </div>
         </CardBody>
         <CardFooter className="pt-0">
-          <CustomButton ButtonText="Debit" isDisabled={!isValid} />
+          <CustomButton
+            ButtonText="Debit"
+            isDisabled={!isValid}
+            isLoading={isLoading}
+          />
         </CardFooter>
       </form>
     </Card>

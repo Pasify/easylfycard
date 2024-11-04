@@ -1,7 +1,8 @@
 import https from "https";
 
 export default function chargeUser(req, res) {
-  const KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const TEST_KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const LIVE_KEY = process.env.VITE_PAYSTACK_LIVE;
 
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow any origin
@@ -18,7 +19,7 @@ export default function chargeUser(req, res) {
   const params = JSON.stringify({
     authorization_code: req.body.authorization_code,
     email: req.body.email,
-    amount: req.body.amount,
+    amount: req.body.amount * 100,
     currency: "NGN",
   });
   const options = {
@@ -27,7 +28,7 @@ export default function chargeUser(req, res) {
     path: "/transaction/charge_authorization",
     method: "POST",
     headers: {
-      Authorization: `Bearer ${KEY}`,
+      Authorization: `Bearer ${LIVE_KEY}`,
       "Content-Type": "application/json",
     },
   };
