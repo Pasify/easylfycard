@@ -6,11 +6,6 @@ export default async function VerifyDDTransaction(reference) {
       "https://easylyfcard.vercel.app/api/paystack/verification",
       {
         reference,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
     console.log(`response from endpoint`, response.data);
