@@ -1,9 +1,6 @@
 import https from "https";
 
 export default function verification(req, res) {
-  const TEST_KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
-  const LIVE_KEY = process.env.VITE_PAYSTACK_LIVE;
-
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -22,7 +19,8 @@ export default function verification(req, res) {
   if (!reference) {
     return res.status(400).json({ error: "Transaction reference is required" });
   }
-
+  const TEST_KEY = process.env.VITE_PAYSTACK_TEST_SECRET_KEY;
+  const LIVE_KEY = process.env.VITE_PAYSTACK_LIVE;
   // Options for Paystack transaction verification
   const options = {
     hostname: "api.paystack.co",
