@@ -1,11 +1,17 @@
 import axios from "axios";
 
 export default async function VerifyDDTransaction(reference) {
+  const { reference: referenceCode } = reference;
   try {
-    let response = axios.post(
+    let response = await axios.post(
       "https://easylyfcard.vercel.app/api/paystack/verification",
       {
-        reference,
+        referenceCode,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     console.log(`response from endpoint`, response.data);

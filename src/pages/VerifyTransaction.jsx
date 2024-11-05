@@ -37,10 +37,12 @@ function VerifyTransaction() {
     reset,
   } = useForm({ mode: "onChange" });
   async function submitReferenceForm(refCode) {
-    const toastId = toast.loading(`Fetching transaction details.... `);
+    // const toastId = toast.loading(`Fetching transaction details.... `);
     try {
       const response = await VerifyDDTransaction(refCode);
+      console.log(refCode.reference);
       console.log(response);
+
       // if (refCode) {
       //   toast.success(`reference code active ${refCode.reference}`, {
       //     id: toastId,
