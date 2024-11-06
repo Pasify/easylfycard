@@ -4,7 +4,7 @@ export default function verification(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
