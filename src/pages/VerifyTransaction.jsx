@@ -80,6 +80,7 @@ function VerifyTransaction() {
                 containerProps={{
                   className: "caret-green-700 shadow-sm",
                 }}
+                defaultValue="kuo53awljjq90r0"
                 label="Reference code"
                 size="lg"
                 {...register("reference", {
