@@ -14,22 +14,9 @@ import Modal from "../components/Modal";
 import VerifyDDTransaction from "../services/verifyTransaction";
 
 function VerifyTransaction() {
-  const defaults = {
-    status: "",
-    amount: 0,
-    reference: "",
-    paid_at: "",
-    customer: { email: "" },
-    channel: "",
-    authorization: {
-      bank: "",
-      authorization_code: "AUTH_uh8bcl3zbn",
-    },
-    fees: 0,
-    gateway_response: "",
-  };
   const [isLoading, setIsLoading] = useState(false);
-  const [transactionData, setTransactionData] = useState(defaults);
+  const [transactionData, setTransactionData] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,12 +24,19 @@ function VerifyTransaction() {
     reset,
   } = useForm({ mode: "onChange" });
   async function submitReferenceForm(refCode) {
-    // const toastId = toast.loading(`Fetching transaction details.... `);
+    const toastId = toast.loading(`Fetching transaction details.... `);
+    setIsLoading(true);
     try {
-      let { reference } = refCode;
       const response = await VerifyDDTransaction(refCode.reference);
-      console.log(`reference code`, refCode.reference);
-      console.log(`verification response`, response);
+      if (response.data.status) {
+        toast.success(`Transaction status: ${response.data.data.status}`, {
+          id: toastId,
+        });
+      }
+      if (response) {
+        setIsOpen(true);
+        setTransactionData(response.data);
+      }
 
       // if (refCode) {
       //   toast.success(`reference code active ${refCode.reference}`, {
@@ -58,7 +52,14 @@ function VerifyTransaction() {
   }
   return (
     <div>
-      {/* <Modal transactionData={transactionData} /> */}
+      {transactionData && (
+        <Modal
+          transactionData={transactionData}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
+
       <Card className="w-full max-w-md sm:w-[24rem] md:w-[28rem] lg:w-[32rem] p-4">
         <CardHeader
           variant="gradient"
@@ -80,7 +81,6 @@ function VerifyTransaction() {
                 containerProps={{
                   className: "caret-green-700 shadow-sm",
                 }}
-                defaultValue="kuo53awljjq90r0"
                 label="Reference code"
                 size="lg"
                 {...register("reference", {
