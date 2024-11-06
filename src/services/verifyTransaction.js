@@ -6,15 +6,15 @@ export default async function VerifyDDTransaction(reference) {
       "https://easylyfcard.vercel.app/api/verification",
       {
         reference: reference,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
     console.log(`response from endpoint`, response.data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(
+      `error verifying transaction: `,
+      error.response ? error.response.data : error.message
+    );
+    throw error;
   }
 }

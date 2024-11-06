@@ -41,18 +41,26 @@ export default function verification(req, res) {
     });
 
     paystackRes.on("end", () => {
-      const responseData = JSON.parse(data);
-      console.log("Paystack Response:", responseData);
-      if (responseData.data && responseData.data.status === "success") {
-        return res.status(200).json({
-          message: "Payment verified successfully",
-          data: responseData,
-        });
-      } else {
-        // Payment failed or was not successful
+      try {
+        const responseData = JSON.parse(data);
+        console.log("Paystack Response:", responseData);
+        if (responseData.data && responseData.data.status === "success") {
+          return res.status(200).json({
+            message: "Payment verified successfully",
+            data: responseData,
+          });
+        } else {
+          // Payment failed or was not successful
+          return res.status(400).json({
+            message: "Payment verification failed",
+            data: responseData,
+          });
+        }
+      } catch (error) {
+        console.error("Error parsing response data:", error);
         return res
-          .status(400)
-          .json({ message: "Payment verification failed", data: responseData });
+          .status(500)
+          .json({ error: "Failed to process verification data" });
       }
     });
   });

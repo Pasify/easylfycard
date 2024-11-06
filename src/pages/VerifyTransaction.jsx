@@ -40,9 +40,9 @@ function VerifyTransaction() {
     // const toastId = toast.loading(`Fetching transaction details.... `);
     try {
       let { reference } = refCode;
-      const response = await VerifyDDTransaction(reference);
-      console.log(refCode.reference);
-      console.log(response);
+      const response = await VerifyDDTransaction(refCode.reference);
+      console.log(`reference code`, refCode.reference);
+      console.log(`verification response`, response);
 
       // if (refCode) {
       //   toast.success(`reference code active ${refCode.reference}`, {
