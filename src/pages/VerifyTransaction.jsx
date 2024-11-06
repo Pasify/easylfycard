@@ -39,7 +39,8 @@ function VerifyTransaction() {
   async function submitReferenceForm(refCode) {
     // const toastId = toast.loading(`Fetching transaction details.... `);
     try {
-      const response = await VerifyDDTransaction(refCode);
+      let { reference } = refCode;
+      const response = await VerifyDDTransaction(reference);
       console.log(refCode.reference);
       console.log(response);
 

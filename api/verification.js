@@ -42,7 +42,7 @@ export default function verification(req, res) {
 
     paystackRes.on("end", () => {
       const responseData = JSON.parse(data);
-
+      console.log("Paystack Response:", responseData);
       if (responseData.data && responseData.data.status === "success") {
         return res.status(200).json({
           message: "Payment verified successfully",
