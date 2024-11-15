@@ -41,7 +41,7 @@ export default function LoginCard() {
     } finally {
       setIsLoading(false);
     }
-    console.log(data);
+    // console.log(data);
   };
   return (
     <Card className="w-full max-w-md sm:w-[24rem] md:w-[28rem] lg:w-[32rem] p-4">

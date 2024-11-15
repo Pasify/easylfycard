@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="bg-background flex justify-center items-center min-h-screen p-4 ">
+    <div className="bg-background flex justify-center items-center h-dvh p-4  overflow-auto">
       <RouterProvider router={router} />
       <Toaster />
     </div>
