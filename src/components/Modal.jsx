@@ -10,7 +10,14 @@ import {
 function Modal({ transactionData, isOpen, onClose }) {
   transactionData = transactionData.data;
   return (
-    <Dialog open={isOpen} handler={onClose}>
+    <Dialog
+      open={isOpen}
+      handler={onClose}
+      animate={{
+        mount: { scale: 1, y: 0 },
+        unmount: { scale: 0.9, y: -100 },
+      }}
+    >
       {/* <DialogHeader>Transaction Details</DialogHeader> */}
       <DialogBody>
         {transactionData ? (

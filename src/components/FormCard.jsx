@@ -1,7 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import initializeDirectDebit from "../services/initDD";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import { MdInfo } from "react-icons/md";
 
 import {
   Card,
@@ -11,14 +12,13 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import CustomButton from "./Button";
+import InputField from "./InputField";
 
 export default function LoginCard() {
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+
+  let methods = useForm({ mode: "onChange" });
+
   const onSubmitForm = async (data) => {
     if (isLoading) return;
     const toastId = toast.loading("initializing Direct Debit...");
@@ -41,6 +41,7 @@ export default function LoginCard() {
     } finally {
       setIsLoading(false);
     }
+    console.log(data);
   };
   return (
     <Card className="w-full max-w-md sm:w-[24rem] md:w-[28rem] lg:w-[32rem] p-4">
@@ -58,33 +59,42 @@ export default function LoginCard() {
         </Typography>
       </CardHeader>
 
-      <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-        <CardBody className="flex flex-col gap-4">
-          <input
-            className="w-full border border-grey-300 bg-grey-0 rounded-sm shadow-sm px-3 py-2 caret-green-700"
-            label="Email Address"
-            placeholder="elon-musk@pluto.com"
-            {...register("email", {
-              required: "Email Address is required",
-              pattern: {
-                value: /^\S+@\S+\.\S+$/i,
-                message: "Please enter a valid email address",
-              },
-            })}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </CardBody>
-        <CardFooter className="pt-0">
-          <CustomButton
-            // handleClick={onSubmitForm}
-            isDisabled={!isValid}
-            isLoading={isLoading}
-            ButtonText="Authorize"
-          />
-        </CardFooter>
-      </form>
+      <FormProvider {...methods}>
+        <form action="" onSubmit={methods.handleSubmit(onSubmitForm)}>
+          <CardBody className="flex flex-col gap-4">
+            <InputField
+              label="Email Address"
+              type="email"
+              inputName="email"
+              validationRule={{
+                required: "Email Address is required",
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/i,
+                  message: "Please enter a valid email address",
+                },
+              }}
+            />
+          </CardBody>
+          <CardFooter className="pt-0 flex flex-col gap-4">
+            <CustomButton
+              isDisabled={!methods.formState.isValid}
+              isLoading={isLoading}
+              ButtonText="Authorize"
+            />
+            <div className="flex gap-2 items-start p-4 bg-gray-200 rounded-lg">
+              <MdInfo className=" text-lg flex-shrink-0" />
+              <Typography
+                color="inherit"
+                className="text-xs sm:text-sm leading-tight text-gray-600"
+              >
+                You will need to transfer ₦50 to the NIBSS account to complete
+                the linkage, enabling repayment. Only salary accounts can be
+                linked
+              </Typography>
+            </div>
+          </CardFooter>
+        </form>
+      </FormProvider>
     </Card>
   );
 }

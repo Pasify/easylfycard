@@ -6,24 +6,22 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import CustomButton from "../components/Button";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
 import VerifyDDTransaction from "../services/verifyTransaction";
+import InputField from "../components/InputField";
 
 function VerifyTransaction() {
   const [isLoading, setIsLoading] = useState(false);
   const [transactionData, setTransactionData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    reset,
-  } = useForm({ mode: "onChange" });
+
+  const methods = useForm({ mode: "onChange" });
   async function submitReferenceForm(refCode) {
+    // console.log(refCode);
     const toastId = toast.loading(`Fetching transaction details.... `);
     setIsLoading(true);
     try {
@@ -47,7 +45,7 @@ function VerifyTransaction() {
       console.log(error);
     } finally {
       setIsLoading(false);
-      reset();
+      methods.reset();
     }
   }
   return (
@@ -74,34 +72,27 @@ function VerifyTransaction() {
             Verify Transaction
           </Typography>
         </CardHeader>
-        <form action="" onSubmit={handleSubmit(submitReferenceForm)}>
-          <CardBody className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <Input
-                containerProps={{
-                  className: "caret-green-700 shadow-sm",
-                }}
+        <FormProvider {...methods}>
+          {" "}
+          <form action="" onSubmit={methods.handleSubmit(submitReferenceForm)}>
+            <CardBody className="flex flex-col gap-4">
+              <InputField
                 label="Reference code"
-                size="lg"
-                {...register("reference", {
+                inputName="reference"
+                validationRule={{
                   required: true,
-                })}
+                }}
               />
-              {errors.reference_code && (
-                <p className="text-red-500 text-sm">
-                  {errors.reference.message}
-                </p>
-              )}
-            </div>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <CustomButton
-              ButtonText="Verify"
-              isDisabled={!isValid}
-              isLoading={isLoading}
-            />
-          </CardFooter>
-        </form>
+            </CardBody>
+            <CardFooter className="pt-0">
+              <CustomButton
+                ButtonText="Verify"
+                isDisabled={!methods.formState.isValid}
+                isLoading={isLoading}
+              />
+            </CardFooter>
+          </form>
+        </FormProvider>
       </Card>
     </div>
   );

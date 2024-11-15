@@ -7,22 +7,19 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import CustomButton from "../components/Button";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import chargeAccount from "../services/chargeAccount";
 import toast from "react-hot-toast";
+import InputField from "../components/InputField";
 
 function ChargeAccount() {
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+
+  const methods = useForm({ mode: "onChange" });
   const submitForm = async (values) => {
+    // console.log(values);
     const toastid = toast.loading("Debiting account...");
-    console.log(values);
     setIsLoading(true);
     try {
       const result = await chargeAccount(values);
@@ -52,7 +49,7 @@ function ChargeAccount() {
       });
     } finally {
       setIsLoading(false);
-      reset();
+      methods.reset();
     }
   };
   useEffect(() => {
@@ -73,39 +70,28 @@ function ChargeAccount() {
           Debit Account
         </Typography>
       </CardHeader>
-      <form action="" onSubmit={handleSubmit(submitForm)}>
-        <CardBody className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Input
+      <FormProvider {...methods}>
+        <form action="" onSubmit={methods.handleSubmit(submitForm)}>
+          <CardBody className="flex flex-col gap-4">
+            <InputField
               label="Authorization code"
-              size="lg"
-              {...register("authorization_code", {
+              type="text"
+              inputName="authorization_code"
+              validationRule={{
                 required: "Authorization code is required",
                 minLength: {
                   value: 6,
                   message:
                     "Authorization code must be at least 6 characters long",
                 },
-              })}
-              // defaultValue="AUTH_rZXeIG72j0"
-              containerProps={{
-                className: "caret-green-700 shadow-sm",
               }}
             />
-            {errors.authorization_code && (
-              <p className="text-red-500 text-sm">
-                {errors.authorization_code.message}
-              </p>
-            )}
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <Input
-              // defaultValue={1000}
+            <InputField
               label="Amount"
-              size="lg"
               type="number"
-              {...register("amount", {
+              inputName="amount"
+              validationRule={{
                 required: "Amount is required",
                 min: {
                   value: 100,
@@ -115,44 +101,31 @@ function ChargeAccount() {
                   value: 1000,
                   message: "Amount must be less than ₦1000",
                 },
-              })}
-              containerProps={{
-                className: "caret-green-700 shadow-sm",
               }}
             />
-            {errors.amount && (
-              <p className="text-red-500 text-sm">{errors.amount.message}</p>
-            )}
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <Input
-              // defaultValue="ese.akposibruke@yahoo.com"
+            <InputField
               label="Linked Email Address"
-              {...register("email", {
+              type="email"
+              inputName="email"
+              validationRule={{
                 required: "Email Address is required",
                 pattern: {
                   value: /^\S+@\S+\.\S+$/i,
                   message: "Please enter a valid email address",
                 },
-              })}
-              containerProps={{
-                className: "caret-green-700 shadow-sm",
               }}
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-          </div>
-        </CardBody>
-        <CardFooter className="pt-0">
-          <CustomButton
-            ButtonText="Debit"
-            isDisabled={!isValid}
-            isLoading={isLoading}
-          />
-        </CardFooter>
-      </form>
+          </CardBody>
+          <CardFooter className="pt-0">
+            <CustomButton
+              ButtonText="Debit"
+              isDisabled={!methods.formState.isValid}
+              isLoading={isLoading}
+            />
+          </CardFooter>
+        </form>
+      </FormProvider>
     </Card>
   );
 }
