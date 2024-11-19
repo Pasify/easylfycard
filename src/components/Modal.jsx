@@ -9,6 +9,7 @@ import {
 
 function Modal({ transactionData, isOpen, onClose }) {
   transactionData = transactionData.data;
+  console.log(transactionData);
   return (
     <Dialog
       open={isOpen}
@@ -23,7 +24,7 @@ function Modal({ transactionData, isOpen, onClose }) {
         {transactionData ? (
           <div className="space-y-6">
             {/* Transaction Status */}
-            <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg">
+            <div className="flex items-center justify-between rounded-lg bg-gray-100 p-4">
               <h2 className="text-xl font-semibold">Status</h2>
               <p
                 className={`text-lg font-bold ${
@@ -34,14 +35,14 @@ function Modal({ transactionData, isOpen, onClose }) {
               >
                 {transactionData.status === "success"
                   ? "Payment Successful"
-                  : "Payment Failed"}
+                  : transactionData.status}
               </p>
             </div>
 
             {/* Transaction Details Section */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-white p-4 shadow rounded-lg">
-                <h3 className="text-lg font-semibold mb-1">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-lg bg-white p-4 shadow">
+                <h3 className="mb-1 text-lg font-semibold">
                   Transaction Details
                 </h3>
                 <p>
@@ -67,8 +68,8 @@ function Modal({ transactionData, isOpen, onClose }) {
               </div>
 
               {/* Customer Information Section */}
-              <div className="bg-white p-4 shadow rounded-lg">
-                <h3 className="text-lg font-semibold mb-1">
+              <div className="rounded-lg bg-white p-4 shadow">
+                <h3 className="mb-1 text-lg font-semibold">
                   Customer Information
                 </h3>
                 <p>
@@ -87,8 +88,8 @@ function Modal({ transactionData, isOpen, onClose }) {
             </div>
 
             {/* Additional Details */}
-            <div className="bg-white p-4 shadow rounded-lg">
-              <h3 className="text-lg font-semibold mb-1">Additional Details</h3>
+            <div className="rounded-lg bg-white p-4 shadow">
+              <h3 className="mb-1 text-lg font-semibold">Additional Details</h3>
               <p>
                 <strong>Transaction Fees:</strong> ₦
                 {transactionData.fees ? transactionData.fees / 100 : "N/A"}

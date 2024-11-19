@@ -25,7 +25,8 @@ export default function verification(req, res) {
   const options = {
     hostname: "api.paystack.co",
     port: 443,
-    path: `/transaction/verify/${reference}`,
+    // path: `/transaction/verify/${reference}`,
+    path: `/customer/authorization/verify/${reference}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${LIVE_KEY}`,
