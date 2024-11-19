@@ -1,0 +1,29 @@
+Received webhook data: {
+  event: 'direct_debit.authorization.created',
+  data: {
+    authorization_code: 'AUTH_6RVRBPzqFX',
+    active: false,
+    last4: '5342',
+    channel: 'direct_debit',
+    card_type: 'mandate',
+    bank: 'United Bank For Africa',
+    exp_month: '11',
+    exp_year: '2034',
+    country_code: 'NG',
+    brand: 'United Bank For Africa',
+    reusable: true,
+    signature: 'SIG_f9JmxpPynl7nuL6qFm7w',
+    account_name: 'OBIORA IFESINACHI PASCHAL',
+    integration: 1295342,
+    domain: 'live',
+    reference: 'e7t77t722ife0d6',
+    customer: {
+      first_name: null,
+      last_name: null,
+      code: 'CUS_8mw0h16677807cu',
+      email: 'ipaeworks@gmail.com',
+      phone: null,
+      metadata: null,
+      risk_action: 'default'
+    }
+  }

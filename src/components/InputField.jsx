@@ -17,7 +17,7 @@ function InputField({ label, type = "text", inputName, validationRule }) {
         {...register(inputName, validationRule)}
       />
       {errors[inputName] && (
-        <p className="text-red-500 text-sm">{errors[inputName].message}</p>
+        <p className="text-xs text-red-500">{errors[inputName].message}</p>
       )}
     </div>
   );

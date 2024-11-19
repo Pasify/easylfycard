@@ -11,10 +11,10 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import CustomButton from "./Button";
-import InputField from "./InputField";
+import CustomButton from "../components/Button";
+import InputField from "../components/InputField";
 
-export default function LoginCard() {
+export default function Authorize() {
   const [isLoading, setIsLoading] = useState(false);
 
   let methods = useForm({ mode: "onChange" });
@@ -31,7 +31,7 @@ export default function LoginCard() {
           "Direct Debit initialized successfully! Redirecting to Paystack...",
           {
             id: toastId,
-          }
+          },
         );
       }
     } catch (error) {
@@ -44,11 +44,11 @@ export default function LoginCard() {
     // console.log(data);
   };
   return (
-    <Card className="w-full max-w-md sm:w-[24rem] md:w-[28rem] lg:w-[32rem] p-4">
+    <Card className="w-full max-w-md p-4 sm:w-[24rem] md:w-[28rem] lg:w-[32rem]">
       <CardHeader
         variant="gradient"
         color="green"
-        className="mb-4 grid h-20 md:h-28 lg:h-32 place-items-center"
+        className="mb-4 grid h-20 place-items-center md:h-28 lg:h-32"
       >
         <Typography
           variant="h3"
@@ -75,17 +75,17 @@ export default function LoginCard() {
               }}
             />
           </CardBody>
-          <CardFooter className="pt-0 flex flex-col gap-4">
+          <CardFooter className="flex flex-col gap-4 pt-0">
             <CustomButton
               isDisabled={!methods.formState.isValid}
               isLoading={isLoading}
               ButtonText="Authorize"
             />
-            <div className="flex gap-2 items-start p-4 bg-gray-200 rounded-lg">
-              <MdInfo className=" text-lg flex-shrink-0" />
+            <div className="flex items-start gap-2 rounded-lg bg-gray-200 p-4">
+              <MdInfo className="flex-shrink-0 text-lg" />
               <Typography
                 color="inherit"
-                className="text-xs sm:text-sm leading-tight text-gray-600"
+                className="text-xs leading-tight text-gray-600 sm:text-sm"
               >
                 You will need to transfer ₦50 to the NIBSS account to complete
                 the linkage, enabling repayment. Only salary accounts can be

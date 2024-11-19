@@ -1,15 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import LoginCard from "../components/FormCard";
+import Authorize from "../pages/Authorize";
 import ErrorPage from "../pages/ErrorPage";
 import ThankYou from "./ThankYou";
 import ChargeAccount from "../pages/ChargeAccount";
 import VerifyTransaction from "../pages/VerifyTransaction";
+import Register from "../pages/Register";
 
 const routes = [
   {
     path: "/",
-    element: <LoginCard />,
+    element: <Register />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "authorize",
+    element: <Authorize />,
   },
   {
     path: "thank-you",
