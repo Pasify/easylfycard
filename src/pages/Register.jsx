@@ -18,8 +18,13 @@ function SignUp() {
     mode: "onChange",
     defaultValues: { gender: "" },
   });
-  let submitRegisterForm = (data) => {
+  let submitRegisterForm = async (data) => {
     console.log(data);
+    try {
+      submitRegisterForm(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const validatePdfFile = (file) => {
     if (!file || file.type !== "application/pdf") {
