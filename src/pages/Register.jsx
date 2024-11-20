@@ -34,52 +34,69 @@ function SignUp() {
   };
   return (
     <div className="flex h-dvh w-dvw">
-      <div className="flex flex-1 basis-[calc(50%-16px)] flex-col items-center justify-center bg-green-50 p-4">
+      <div className="hidden flex-col items-center justify-center bg-green-50 p-4 md:flex md:w-1/2">
         <div>
-          <Typography variant="h4">Life is easier With </Typography>
-          <Typography variant="lead">EasyLyf Payment card</Typography>
+          <Typography
+            variant="h4"
+            className="text-lg font-semibold md:text-xl lg:text-2xl"
+          >
+            Life is so much easier{" "}
+          </Typography>
+          <Typography
+            variant="lead"
+            className="text-sm text-gray-700 md:text-base lg:text-lg"
+          >
+            With EasyLyf card
+          </Typography>
         </div>
-        <div className="h-[70%]">
-          <img src={image3} alt="" className="size-full object-contain" />
+        <div className="flex h-[70%] w-full justify-center">
+          <img
+            src={image3}
+            alt=""
+            className="max-h-full max-w-full object-contain"
+          />
         </div>
       </div>
-      <div className="flex flex-1 basis-[calc(50%-16px)] items-center justify-center">
-        <div>
+      <div className="flex flex-1 items-center justify-center p-4 md:w-1/2">
+        <div className="w-full max-w-md sm:w-[22rem] md:w-[26rem] lg:w-[30rem]">
           <div className="mb-3 text-center">
-            <Typography className="text-lg text-gray-600 sm:text-xl md:text-xl lg:text-2xl">
+            <Typography className="text-lg font-medium text-gray-600 sm:text-sm md:text-xl lg:text-2xl">
               Welcome to EasyLyf Card
+            </Typography>
+            <Typography
+              variant="lead"
+              className="text-sm text-gray-600 sm:text-base md:text-lg"
+            >
+              Tell us a little about you
             </Typography>
           </div>
           <Card className="w-full max-w-md p-4 sm:w-[24rem] md:w-[28rem] lg:w-[32rem]">
             <FormProvider {...methods}>
               <form onSubmit={methods.handleSubmit(submitRegisterForm)}>
                 <CardBody className="flex flex-col gap-4 p-2">
-                  <div className="flex justify-center gap-2">
-                    <InputField
-                      label="First Name"
-                      inputName="firstName"
-                      validationRule={{
-                        required: "First name is required",
-                        minLength: {
-                          value: 2,
-                          message:
-                            "First name must be at least 2 characters long",
-                        },
-                      }}
-                    />
-                    <InputField
-                      label="Last Name"
-                      inputName="lastName"
-                      validationRule={{
-                        required: "Last name is required",
-                        minLength: {
-                          value: 2,
-                          message:
-                            "last name must be at least 2 characters long",
-                        },
-                      }}
-                    />
-                  </div>
+                  <InputField
+                    label="First Name"
+                    inputName="firstName"
+                    validationRule={{
+                      required: "First name is required",
+                      minLength: {
+                        value: 2,
+                        message:
+                          "First name must be at least 2 characters long",
+                      },
+                    }}
+                  />
+                  <InputField
+                    label="Last Name"
+                    inputName="lastName"
+                    validationRule={{
+                      required: "Last name is required",
+                      minLength: {
+                        value: 2,
+                        message: "last name must be at least 2 characters long",
+                      },
+                    }}
+                  />
 
                   <EmailInput />
                   <InputField
