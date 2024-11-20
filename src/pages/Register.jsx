@@ -143,7 +143,7 @@ function SignUp() {
                       )}
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <InputField
                       accept="application/pdf"
                       className="w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border file:border-green-500 file:bg-green-50 file:px-2 file:py-1 file:text-green-700 hover:file:bg-green-100 hover:file:text-green-900"
@@ -158,7 +158,7 @@ function SignUp() {
                         },
                       }}
                     />
-                  </div>
+                  </div> */}
                 </CardBody>
                 <CardFooter className="p-2">
                   <CustomButton
