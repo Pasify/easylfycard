@@ -23,13 +23,13 @@ function SignUp() {
   };
   const validatePdfFile = (file) => {
     if (!file || file.type !== "application/pdf") {
-      methods.setError("pdfUpload", {
+      methods.setError("bank_statement", {
         type: "manual",
         message: "Only PDF files are allowed",
       });
       return false;
     }
-    methods.clearErrors("pdfUpload");
+    methods.clearErrors("bank_statement");
     return true;
   };
   return (
@@ -144,7 +144,7 @@ function SignUp() {
                       className="w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border file:border-green-500 file:bg-green-50 file:px-2 file:py-1 file:text-green-700 hover:file:bg-green-100 hover:file:text-green-900"
                       type="file"
                       label="Bank statement"
-                      inputName="pdfFile"
+                      inputName="bank_statement"
                       validationRule={{
                         required: "Bank statement is required",
                         validate: (value) => {
