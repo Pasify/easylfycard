@@ -21,6 +21,17 @@ function SignUp() {
   let submitRegisterForm = (data) => {
     console.log(data);
   };
+  const validatePdfFile = (file) => {
+    if (!file || file.type !== "application/pdf") {
+      methods.setError("pdfUpload", {
+        type: "manual",
+        message: "Only PDF files are allowed",
+      });
+      return false;
+    }
+    methods.clearErrors("pdfUpload");
+    return true;
+  };
   return (
     <div className="flex h-dvh w-dvw">
       <div className="flex flex-1 basis-[calc(50%-16px)] flex-col items-center justify-center bg-green-50 p-4">
@@ -43,29 +54,33 @@ function SignUp() {
             <FormProvider {...methods}>
               <form onSubmit={methods.handleSubmit(submitRegisterForm)}>
                 <CardBody className="flex flex-col gap-4 p-2">
-                  <InputField
-                    label="First Name"
-                    inputName="firstName"
-                    validationRule={{
-                      required: "First name is required",
-                      minLength: {
-                        value: 2,
-                        message:
-                          "First name must be at least 2 characters long",
-                      },
-                    }}
-                  />
-                  <InputField
-                    label="Last Name"
-                    inputName="lastName"
-                    validationRule={{
-                      required: "Last name is required",
-                      minLength: {
-                        value: 2,
-                        message: "last name must be at least 2 characters long",
-                      },
-                    }}
-                  />
+                  <div className="flex justify-center gap-2">
+                    <InputField
+                      label="First Name"
+                      inputName="firstName"
+                      validationRule={{
+                        required: "First name is required",
+                        minLength: {
+                          value: 2,
+                          message:
+                            "First name must be at least 2 characters long",
+                        },
+                      }}
+                    />
+                    <InputField
+                      label="Last Name"
+                      inputName="lastName"
+                      validationRule={{
+                        required: "Last name is required",
+                        minLength: {
+                          value: 2,
+                          message:
+                            "last name must be at least 2 characters long",
+                        },
+                      }}
+                    />
+                  </div>
+
                   <EmailInput />
                   <InputField
                     label="Phone Number"
@@ -104,6 +119,22 @@ function SignUp() {
                           )}
                         </>
                       )}
+                    />
+                  </div>
+                  <div>
+                    <InputField
+                      accept="application/pdf"
+                      className="w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border file:border-green-500 file:bg-green-50 file:px-2 file:py-1 file:text-green-700 hover:file:bg-green-100 hover:file:text-green-900"
+                      type="file"
+                      label="Bank statement"
+                      inputName="pdfFile"
+                      validationRule={{
+                        required: "Bank statement is required",
+                        validate: (value) => {
+                          let file = value[0];
+                          return validatePdfFile(file) || "Invalid file type.";
+                        },
+                      }}
                     />
                   </div>
                 </CardBody>

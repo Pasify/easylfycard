@@ -1,6 +1,12 @@
 import { Input } from "@material-tailwind/react";
 import { useFormContext } from "react-hook-form";
-function InputField({ label, type = "text", inputName, validationRule }) {
+function InputField({
+  label,
+  type = "text",
+  inputName,
+  validationRule,
+  ...otherProps
+}) {
   const {
     register,
     formState: { errors },
@@ -15,6 +21,7 @@ function InputField({ label, type = "text", inputName, validationRule }) {
         label={label}
         size="lg"
         {...register(inputName, validationRule)}
+        {...otherProps}
       />
       {errors[inputName] && (
         <p className="text-xs text-red-500">{errors[inputName].message}</p>
