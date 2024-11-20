@@ -1,6 +1,16 @@
 import pool from "./dbpool";
 
 export default async function submitForm(req, res) {
+  // Add CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS"); // Allowed methods
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type"); // Allowed headers
+
+  if (req.method === "OPTIONS") {
+    // Handle the preflight request
+    res.status(200).end();
+    return;
+  }
   if (req.method === "POST") {
     const { firstName, lastName, email, phoneNumber, gender, bank_statement } =
       req.body;

@@ -13,6 +13,7 @@ import image3 from "/images/img3.png";
 import InputField from "../components/InputField";
 import CustomButton from "../components/Button";
 import EmailInput from "../components/EmailInput";
+import submitRegistration from "../services/submitRegistration";
 function SignUp() {
   const methods = useForm({
     mode: "onChange",
@@ -21,7 +22,7 @@ function SignUp() {
   async function submitRegisterForm(data) {
     try {
       // console.log(data);
-      await submitRegisterForm(data);
+      await submitRegistration(data);
     } catch (error) {
       console.log(error);
     }
