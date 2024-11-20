@@ -1,16 +1,33 @@
+import cors from "cors";
 import pool from "./dbpool.js";
 
+const corsMiddleware = cors({
+  origin: "http://localhost:5173", // Allow frontend origins
+  methods: ["POST", "GET", "OPTIONS"], // Allowed methods
+  allowedHeaders: ["Content-Type"], // Allowed headers
+});
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+}
 export default async function submitForm(req, res) {
+  await runMiddleware(req, res, corsMiddleware);
   // Add CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS"); // Allowed methods
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type"); // Allowed headers
+  // res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+  // res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS"); // Allowed methods
+  // res.setHeader("Access-Control-Allow-Headers", "Content-Type"); // Allowed headers
 
-  if (req.method === "OPTIONS") {
-    // Handle the preflight request
-    res.status(200).end();
-    return;
-  }
+  // if (req.method === "OPTIONS") {
+  //   // Handle the preflight request
+  //   res.status(200).end();
+  //   return;
+  // }
   if (req.method === "POST") {
     const { firstName, lastName, email, phoneNumber, gender, bank_statement } =
       req.body;

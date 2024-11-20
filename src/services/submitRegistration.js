@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default async function submitRegistration(userInfo) {
   try {
+    console.log(userInfo);
     let response = await axios.post(
       "https://easylyfcard.vercel.app/api/submitForm",
       userInfo,
