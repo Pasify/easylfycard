@@ -1,4 +1,4 @@
-import pool from "./dbpool";
+import pool from "./dbpool.js";
 
 export default async function submitForm(req, res) {
   // Add CORS headers
