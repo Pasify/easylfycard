@@ -9,7 +9,7 @@ export default async function submitForm(req, res) {
       const connection = await pool.getConnection();
       // Insert the data into the database
       const query = `
-        INSERT INTO easylyfcard_users (first_name, last_name, email, phone_number, gender, bank_statement)
+        INSERT INTO easylyfcard_users (first_name, last_name, email, phone_number, gender)
         VALUES (?, ?, ?, ?, ?, ?)
       `;
 
@@ -19,7 +19,7 @@ export default async function submitForm(req, res) {
         email,
         phoneNumber,
         gender,
-        bank_statement,
+        // bank_statement,
       ]);
       // Release the connection back to the pool
       connection.release();
