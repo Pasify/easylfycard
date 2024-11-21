@@ -32,6 +32,7 @@ export default async function submitForm(req, res) {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
   if (req.method === "POST") {
+    console.log(req.body);
     const { firstName, lastName, email, phoneNumber, gender } = req.body;
 
     try {
