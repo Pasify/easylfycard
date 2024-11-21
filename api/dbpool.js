@@ -1,6 +1,7 @@
-import mysql from "mysql2-promise";
+import mysql from "mysql2/promise";
 const pool = mysql.createPool({
-  host: "localhost:3306",
+  host: "localhost",
+  port: "3306",
   user: "paskkal",
   password: "Pascal6190##",
   database: "kxzxovhu_easylyfcard_users",
