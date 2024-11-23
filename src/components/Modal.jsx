@@ -25,17 +25,13 @@ function Modal({ transactionData, isOpen, onClose }) {
           <div className="space-y-6">
             {/* Transaction Status */}
             <div className="flex items-center justify-between rounded-lg bg-gray-100 p-4">
-              <h2 className="text-xl font-semibold">Status</h2>
+              <h2 className="text-xl font-semibold">Authorization status</h2>
               <p
                 className={`text-lg font-bold ${
-                  transactionData.status === "success"
-                    ? "text-green-500"
-                    : "text-red-500"
+                  transactionData.active ? "text-green-500" : "text-red-500"
                 }`}
               >
-                {transactionData.status === "success"
-                  ? "Payment Successful"
-                  : transactionData.status}
+                {transactionData.active ? "Active" : "Inactive"}
               </p>
             </div>
 
@@ -47,24 +43,21 @@ function Modal({ transactionData, isOpen, onClose }) {
                 </h3>
                 <p>
                   <strong>Authorization Code:</strong>{" "}
-                  {transactionData.authorization?.authorization_code || "N/A"}
+                  {transactionData?.authorization_code || "N/A"}
                 </p>
                 <p>
-                  <strong>Amount Paid:</strong> ₦
-                  {transactionData.amount
-                    ? transactionData.amount / 100
-                    : "N/A"}
+                  <strong>Payment Channel:</strong>{" "}
+                  {transactionData.channel || "N/A"}
                 </p>
                 <p>
-                  <strong>Transaction Reference:</strong>{" "}
-                  {transactionData.reference || "N/A"}
+                  <strong>Bank:</strong> {transactionData.bank || "N/A"}
                 </p>
-                <p>
+                {/* <p>
                   <strong>Payment Date:</strong>{" "}
                   {transactionData.paid_at
                     ? new Date(transactionData.paid_at).toLocaleString()
                     : "N/A"}
-                </p>
+                </p> */}
               </div>
 
               {/* Customer Information Section */}
@@ -73,16 +66,17 @@ function Modal({ transactionData, isOpen, onClose }) {
                   Customer Information
                 </h3>
                 <p>
+                  <strong>Account Name:</strong>{" "}
+                  {transactionData?.account_name || "N/A"}
+                </p>
+                <p>
                   <strong>Email:</strong>{" "}
                   {transactionData.customer?.email || "N/A"}
                 </p>
+
                 <p>
-                  <strong>Payment Channel:</strong>{" "}
-                  {transactionData.channel || "N/A"}
-                </p>
-                <p>
-                  <strong>Bank:</strong>{" "}
-                  {transactionData.authorization?.bank || "N/A"}
+                  <strong>Customer code:</strong>{" "}
+                  {transactionData.customer?.code || "N/A"}
                 </p>
               </div>
             </div>
@@ -90,16 +84,19 @@ function Modal({ transactionData, isOpen, onClose }) {
             {/* Additional Details */}
             <div className="rounded-lg bg-white p-4 shadow">
               <h3 className="mb-1 text-lg font-semibold">Additional Details</h3>
-              <p>
+              {/* <p>
                 <strong>Transaction Fees:</strong> ₦
                 {transactionData.fees ? transactionData.fees / 100 : "N/A"}
+              </p> */}
+              <p>
+                <strong>Card Type:</strong> {transactionData.card_type || "N/A"}
               </p>
               <p>
-                <strong>Gateway Response:</strong>{" "}
-                {transactionData.gateway_response || "N/A"}
+                <strong>Reusable:</strong>{" "}
+                {transactionData.reusable ? "Yes" : "no"}
               </p>
               <p>
-                <strong>Message:</strong> {transactionData.message || "N/A"}
+                <strong>Signature:</strong> {transactionData.signature}
               </p>
             </div>
           </div>

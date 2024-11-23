@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export default async function verifyAuth(reference) {
+export default async function verifyChargeTransaction(reference) {
   try {
     let response = await axios.post(
-      "https://easylyfcard.vercel.app/api/verifyAuthorization",
+      "https://easylyfcard.vercel.app/api/verifyTransaction",
       {
         reference: reference,
       },

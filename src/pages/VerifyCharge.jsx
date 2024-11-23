@@ -1,57 +1,41 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Input,
   Typography,
 } from "@material-tailwind/react";
 import { FormProvider, useForm } from "react-hook-form";
-import CustomButton from "../components/Button";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import Modal from "../components/Modal";
-import verifyAuth from "../services/verifyAuth";
-import InputField from "../components/InputField";
 
-function VerifyAuthorization() {
-  const [isLoading, setIsLoading] = useState(false);
+import CustomButton from "../components/Button";
+// import Modal from "../components/Modal";
+import InputField from "../components/InputField";
+import verifyChargeTransaction from "../services/verifyCharge";
+
+function VerifyCharge() {
   const [transactionData, setTransactionData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const methods = useForm({ mode: "onChange" });
-  async function submitReferenceForm(refCode) {
-    // console.log(refCode);
-    const toastId = toast.loading(`Fetching Authorization details.... `);
-    setIsLoading(true);
+
+  async function submitReference(refCode) {
     try {
-      const response = await verifyAuth(refCode.reference);
-      if (response.data.status) {
-        toast.success(`Transaction status: ${response.data.data.status}`, {
-          id: toastId,
-        });
-      }
+      const toastId = toast.loading("Fetching Transaction details...");
+      console.log(refCode);
+      const response = await verifyChargeTransaction(refCode.reference);
       if (response) {
-        setIsOpen(true);
-        setTransactionData(response.data);
+        console.log(`response received:`, response);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     } finally {
-      setIsLoading(false);
       methods.reset();
     }
   }
   return (
     <div>
-      {transactionData && (
-        <Modal
-          transactionData={transactionData}
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-        />
-      )}
-
       <Card className="w-full max-w-md p-4 sm:w-[24rem] md:w-[28rem] lg:w-[32rem]">
         <CardHeader
           variant="gradient"
@@ -63,15 +47,15 @@ function VerifyAuthorization() {
             color="white"
             className="text-lg sm:text-xl md:text-2xl lg:text-3xl"
           >
-            Verify Authorization
+            Verify Transaction
           </Typography>
         </CardHeader>
         <FormProvider {...methods}>
           {" "}
-          <form action="" onSubmit={methods.handleSubmit(submitReferenceForm)}>
+          <form action="" onSubmit={methods.handleSubmit(submitReference)}>
             <CardBody className="flex flex-col gap-4">
               <InputField
-                label="Reference code"
+                label="Transaction Reference"
                 inputName="reference"
                 validationRule={{
                   required: true,
@@ -82,7 +66,7 @@ function VerifyAuthorization() {
               <CustomButton
                 ButtonText="Verify"
                 isDisabled={!methods.formState.isValid}
-                isLoading={isLoading}
+                isLoading={methods.formState.isSubmitted}
               />
             </CardFooter>
           </form>
@@ -92,4 +76,4 @@ function VerifyAuthorization() {
   );
 }
 
-export default VerifyAuthorization;
+export default VerifyCharge;

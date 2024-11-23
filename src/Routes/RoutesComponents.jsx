@@ -6,6 +6,7 @@ import ChargeAccount from "../pages/ChargeAccount";
 
 import Register from "../pages/Register";
 import VerifyAuthorization from "../pages/VerifyAuthorization";
+import VerifyCharge from "../pages/VerifyCharge";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: "verify-authorization",
     element: <VerifyAuthorization />,
+  },
+  {
+    path: "verify-transaction",
+    element: <VerifyCharge />,
   },
 ];
 const router = createBrowserRouter(routes);
