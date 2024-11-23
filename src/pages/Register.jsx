@@ -8,23 +8,45 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { FormProvider, useForm, Controller } from "react-hook-form";
+import toast from "react-hot-toast";
+
+import createNewUser from "../services/createNewUser";
 
 import image3 from "/images/img3.png";
 import InputField from "../components/InputField";
 import CustomButton from "../components/Button";
 import EmailInput from "../components/EmailInput";
-import submitRegistration from "../services/submitRegistration";
+import { useNavigate } from "react-router-dom";
+
 function SignUp() {
+  const navigate = useNavigate();
   const methods = useForm({
     mode: "onChange",
     defaultValues: { gender: "" },
   });
   async function submitRegisterForm(data) {
+    const toastid = toast.loading("Creating new user...");
     try {
-      // console.log(data);
-      await submitRegistration(data);
+      const response = await createNewUser(data);
+      if (response) {
+        toast.success("User created successfully!", {
+          id: toastid,
+        });
+      }
+      // clear the form
+      if (methods.formState.isSubmitted) {
+        methods.reset();
+      }
+      // navigate to the authorization page
+      toast(`Redirecting to Authorization Page`);
+      setTimeout(() => {
+        navigate("/authorize");
+      }, 3000);
     } catch (error) {
       console.log(error);
+      toast.error("Error creating user:", {
+        id: toastid,
+      });
     }
   }
   const validatePdfFile = (file) => {
@@ -40,7 +62,7 @@ function SignUp() {
   };
   return (
     <div className="flex h-dvh w-dvw">
-      <div className="hidden flex-col items-center justify-center bg-green-50 p-4 md:flex md:w-1/2">
+      <div className="hidden flex-col items-center justify-center bg-green-50 p-4 md:flex md:w-1/3">
         <div>
           <Typography
             variant="h4"
@@ -165,6 +187,7 @@ function SignUp() {
                   <CustomButton
                     ButtonText="Proceed"
                     isDisabled={!methods.formState.isValid}
+                    isLoading={methods.formState.isSubmitting}
                   />
                 </CardFooter>
               </form>

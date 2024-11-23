@@ -35,7 +35,7 @@ function ChargeAccount() {
         } else if (result.type === "network_error") {
           toast.error(
             "Network Error: Unable to process request. Please try again.",
-            { id: toastid }
+            { id: toastid },
           );
         } else {
           toast.error("An unknown error occurred. Please try again.", {
@@ -44,9 +44,12 @@ function ChargeAccount() {
         }
       }
     } catch (error) {
-      toast.error("Failed to Debit Account, Please try again", {
-        id: toastid,
-      });
+      toast.error(
+        `Failed to Debit Account, Please try again : ${error.message}`,
+        {
+          id: toastid,
+        },
+      );
     } finally {
       setIsLoading(false);
       methods.reset();
@@ -56,11 +59,11 @@ function ChargeAccount() {
     document.title = "Perform Debit";
   }, []);
   return (
-    <Card className="w-full max-w-md sm:w-[24rem] md:w-[28rem] lg:w-[32rem] p-4">
+    <Card className="w-full max-w-md p-4 sm:w-[24rem] md:w-[28rem] lg:w-[32rem]">
       <CardHeader
         variant="gradient"
         color="green"
-        className="mb-4 grid h-20 md:h-28 lg:h-32 place-items-center"
+        className="mb-4 grid h-20 place-items-center md:h-28 lg:h-32"
       >
         <Typography
           variant="h3"
