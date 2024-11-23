@@ -1,6 +1,6 @@
 import https from "https";
 
-export default function verification(req, res) {
+export default function verifyAuthorization(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -25,7 +25,6 @@ export default function verification(req, res) {
   const options = {
     hostname: "api.paystack.co",
     port: 443,
-    // path: `/transaction/verify/${reference}`,
     path: `/customer/authorization/verify/${reference}`,
     method: "GET",
     headers: {
@@ -47,31 +46,10 @@ export default function verification(req, res) {
         console.log("Paystack Response:", responseData);
 
         if (responseData.data) {
-          const transactionStatus = responseData.data.status;
-
-          // Check for specific status conditions
-          if (transactionStatus === "success") {
-            return res.status(200).json({
-              message: "Payment verified successfully",
-              data: responseData,
-            });
-          } else if (transactionStatus === "abandoned") {
-            return res.status(202).json({
-              message: "Payment was abandoned by the user",
-              data: responseData,
-            });
-          } else if (transactionStatus === "pending") {
-            return res.status(202).json({
-              message: "Payment is still pending",
-              data: responseData,
-            });
-          } else {
-            // For all other statuses like "failed", "reversed", etc.
-            return res.status(400).json({
-              message: `Payment verification failed with status: ${transactionStatus}`,
-              data: responseData,
-            });
-          }
+          return res.status(200).json({
+            message: `Payment verification retrived with status`,
+            data: responseData,
+          });
         } else {
           // In case responseData.data is missing
           return res.status(400).json({

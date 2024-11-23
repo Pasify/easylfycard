@@ -3,8 +3,9 @@ import Authorize from "../pages/Authorize";
 import ErrorPage from "../pages/ErrorPage";
 import ThankYou from "./ThankYou";
 import ChargeAccount from "../pages/ChargeAccount";
-import VerifyTransaction from "../pages/VerifyTransaction";
+
 import Register from "../pages/Register";
+import VerifyAuthorization from "../pages/VerifyAuthorization";
 
 const routes = [
   {
@@ -25,8 +26,8 @@ const routes = [
     element: <ChargeAccount />,
   },
   {
-    path: "verify",
-    element: <VerifyTransaction />,
+    path: "verify-authorization",
+    element: <VerifyAuthorization />,
   },
 ];
 const router = createBrowserRouter(routes);
