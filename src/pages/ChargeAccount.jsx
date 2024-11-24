@@ -9,7 +9,7 @@ import {
 import CustomButton from "../components/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import chargeAccount from "../services/chargeAccount";
+import { chargeAccount } from "../services";
 import toast from "react-hot-toast";
 import InputField from "../components/InputField";
 

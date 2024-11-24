@@ -10,7 +10,7 @@ import {
 import { FormProvider, useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import createNewUser from "../services/createNewUser";
+import { createNewUser } from "../services";
 
 import image3 from "/images/img3.png";
 import InputField from "../components/InputField";

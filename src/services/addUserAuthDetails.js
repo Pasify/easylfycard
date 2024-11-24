@@ -1,6 +1,6 @@
 import { db } from "./testdb";
 
-export default async function addUserAuthDetails(webhookData) {
+async function addUserAuthDetails(webhookData) {
   try {
     // Destructure the required fields from webhookData
     const {
@@ -44,3 +44,5 @@ export default async function addUserAuthDetails(webhookData) {
     throw new Error(`Error Adding User Authentication Data ${error.message}`);
   }
 }
+
+export default addUserAuthDetails;
