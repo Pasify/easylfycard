@@ -13,6 +13,8 @@ import CustomButton from "../components/Button";
 // import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import verifyChargeTransaction from "../services/verifyCharge";
+import Modal from "../components/Modal";
+import RenderChargeContent from "../components/RenderChargeContent";
 
 function VerifyCharge() {
   const [transactionData, setTransactionData] = useState(null);
@@ -23,10 +25,18 @@ function VerifyCharge() {
   async function submitReference(refCode) {
     try {
       const toastId = toast.loading("Fetching Transaction details...");
-      console.log(refCode);
+      // console.log(refCode);
       const response = await verifyChargeTransaction(refCode.reference);
-      if (response) {
-        console.log(`response received:`, response);
+      if (response.data.status) {
+        toast.success(`Transaction status: ${response.data.data.status}`, {
+          id: toastId,
+        });
+      }
+      if (response.data.data) {
+        setTransactionData(response.data.data);
+        setIsOpen(true);
+
+        // console.log(`response received:`, response.data.data);
       }
     } catch (error) {
       console.log(error.message);
@@ -36,6 +46,15 @@ function VerifyCharge() {
   }
   return (
     <div>
+      {transactionData && (
+        <Modal
+          transactionData={transactionData}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          renderContent={RenderChargeContent}
+          title="Transaction status"
+        />
+      )}
       <Card className="w-full max-w-md p-4 sm:w-[24rem] md:w-[28rem] lg:w-[32rem]">
         <CardHeader
           variant="gradient"
@@ -66,7 +85,7 @@ function VerifyCharge() {
               <CustomButton
                 ButtonText="Verify"
                 isDisabled={!methods.formState.isValid}
-                isLoading={methods.formState.isSubmitted}
+                isLoading={methods.formState.isSubmitting}
               />
             </CardFooter>
           </form>

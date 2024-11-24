@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import Modal from "../components/Modal";
 import verifyAuth from "../services/verifyAuth";
 import InputField from "../components/InputField";
+import RenderAuthContent from "../components/RenderAuthContent";
 
 function VerifyAuthorization() {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +50,8 @@ function VerifyAuthorization() {
           transactionData={transactionData}
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          renderContent={RenderAuthContent}
+          title="Authorization Status"
         />
       )}
 

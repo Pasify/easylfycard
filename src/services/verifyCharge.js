@@ -8,7 +8,7 @@ export default async function verifyChargeTransaction(reference) {
         reference: reference,
       },
     );
-    console.log(`response from endpoint`, response.data);
+    // console.log(`response from endpoint`, response.data);
     return response.data;
   } catch (error) {
     console.log(
