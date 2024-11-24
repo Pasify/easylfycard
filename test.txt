@@ -26,4 +26,4 @@ Received webhook data: {
       metadata: null,
       risk_action: 'default'
     }
-  }
+  } 
