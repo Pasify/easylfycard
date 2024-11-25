@@ -61,6 +61,10 @@ export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
+  const databaseURl = process.env.VITE_TURSO_DATABASE_URL;
+  const authToken = process.env.VITE_TURSO_AUTH_TOKEN;
+  console.log(databaseURl);
+  console.log(authToken);
 
   try {
     const { data } = req?.body || {};
