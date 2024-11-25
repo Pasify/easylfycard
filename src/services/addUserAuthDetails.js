@@ -1,4 +1,4 @@
-import { db } from "./testdb";
+import { db } from "./index";
 
 async function addUserAuthDetails(webhookData) {
   try {

@@ -1,4 +1,4 @@
-import { db } from "./testdb";
+import { db } from "./index";
 export default async function createNewUser(newUserData) {
   try {
     const { firstName, lastName, email, phoneNumber, gender } = newUserData;
