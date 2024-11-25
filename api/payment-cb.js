@@ -5,10 +5,15 @@ import https from "https";
 
 async function addUserAuthDetails(webhookData) {
   try {
+    const databaseURl = process.env.VITE_TURSO_DATABASE_URL;
+    const authToken = process.env.VITE_TURSO_AUTH_TOKEN;
     const db = createClient({
-      url: process.env.VITE_TURSO_DATABASE_URL,
-      authToken: process.env.VITE_TURSO_AUTH_TOKEN,
+      url: databaseURl,
+      authToken: authToken,
     });
+
+    console.log(databaseURl);
+    console.log(authToken);
     // Destructure the required fields from webhookData
     const {
       authorization_code,
