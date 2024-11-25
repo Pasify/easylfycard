@@ -1,6 +1,12 @@
-import { db } from "./index";
+// import { db } from "../services/";
+
+import { createClient } from "@libsql/client";
 
 async function addUserAuthDetails(webhookData) {
+  const db = createClient({
+    url: process.env.TURSO_DATABASE_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN,
+  });
   try {
     // Destructure the required fields from webhookData
     const {

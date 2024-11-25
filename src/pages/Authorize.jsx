@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { initializeDirectDebit } from "../services";
+import initializeDirectDebit from "../services/initDD";
 import { FormProvider, useForm } from "react-hook-form";
 import { MdInfo } from "react-icons/md";
 

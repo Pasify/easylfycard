@@ -10,7 +10,7 @@ import {
 import { FormProvider, useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import { createNewUser } from "../services";
+import createNewUser from "../services/createNewUser";
 
 import image3 from "/images/img3.png";
 import InputField from "../components/InputField";
@@ -24,6 +24,7 @@ function SignUp() {
     mode: "onChange",
     defaultValues: { gender: "" },
   });
+
   async function submitRegisterForm(data) {
     const toastid = toast.loading("Creating new user...");
     try {
