@@ -1,4 +1,6 @@
 function RenderAuthContent({ transactionData }) {
+  // console.log(`transaction data is : `, transactionData);
+  transactionData = transactionData.data;
   return (
     <div className="space-y-6">
       {/* Transaction Status */}

@@ -27,3 +27,42 @@ Received webhook data: {
       risk_action: 'default'
     }
   } 
+
+  Paystack Response: {"status":true,"message":"Authorization initialized","data":{"redirect_url":"https://link.paystack.com/oo2el2zhksz4y32","access_code":"oo2el2zhksz4y32","reference":"e9e3n5ruwviq1s8"}}
+
+  
+
+
+
+  ///////////////
+
+  Received webhook data: {
+  event: 'direct_debit.authorization.created',
+  data: {
+    authorization_code: 'AUTH_Z3DtABaUz3',
+    active: false,
+    last4: '8102',
+    channel: 'direct_debit',
+    card_type: 'mandate',
+    bank: 'Ecobank Nigeria',
+    exp_month: '11',
+    exp_year: '2034',
+    country_code: 'NG',
+    brand: 'Ecobank Nigeria',
+    reusable: true,
+    signature: 'SIG_0v0kPHpNAo1pLhzPv3Le',
+    account_name: 'AKPOSIBRUKE ESE VICTOR',
+    integration: 1295342,
+    domain: 'live',
+    reference: 'agc2d10dbbcoflc',
+    customer: {
+      first_name: null,
+      last_name: null,
+      code: 'CUS_8tio6nyog54g4cr',
+      email: 'akpos.e@gmail.com',
+      phone: null,
+      metadata: null,
+      risk_action: 'default'
+    }
+  }
+} 

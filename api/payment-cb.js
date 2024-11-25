@@ -12,8 +12,6 @@ async function addUserAuthDetails(webhookData) {
       authToken: authToken,
     });
 
-    console.log(databaseURl);
-    console.log(authToken);
     // Destructure the required fields from webhookData
     const {
       authorization_code,
@@ -61,10 +59,6 @@ export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
-  const databaseURl = process.env.VITE_TURSO_DATABASE_URL;
-  const authToken = process.env.VITE_TURSO_AUTH_TOKEN;
-  console.log(databaseURl);
-  console.log(authToken);
 
   try {
     const { data } = req?.body || {};
