@@ -1,7 +1,5 @@
 import { createClient } from "@libsql/client";
 import https from "https";
-// import { addUserAuthDetails } from "../src/services";
-// import addUserAuthDetails from "../src/services/addUserAuthDetails";
 
 async function addUserAuthDetails(webhookData) {
   try {
@@ -22,7 +20,12 @@ async function addUserAuthDetails(webhookData) {
       account_name = null,
       signature,
       reference = null,
-      customer: { email } = {},
+      customer: {
+        email,
+        first_name = null,
+        last_name = null,
+        phone = null,
+      } = {},
     } = webhookData;
 
     // Validation: Ensure essential fields are present
@@ -32,6 +35,20 @@ async function addUserAuthDetails(webhookData) {
       throw new Error("Missing essential authorization details.");
     }
 
+    // Ensure the email exists in card_users table
+    const userExists = await db.execute({
+      sql: "SELECT email FROM card_users WHERE email = ?",
+      args: [email],
+    });
+
+    if (userExists.rows.length === 0) {
+      // Insert email into card_users table
+      await db.execute({
+        sql: "INSERT INTO card_users (email, first_name, last_name, phone_number) VALUES (?, ?, ?, ?)",
+        args: [email, first_name ?? account_name, last_name, phone],
+      });
+      console.log(`User with email ${email} added to card_users table.`);
+    }
     // Insert data into user_authorizations table
     await db.execute({
       sql: "INSERT INTO user_authorizations (email, authorization_code, active, card_type, bank, reusable,  signature, account_name, reference) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",

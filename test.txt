@@ -33,13 +33,13 @@ Received webhook data: {
   
 
 
-
+authorization_code: 'AUTH_Z3DtABaUz3',
   ///////////////
 
   Received webhook data: {
   event: 'direct_debit.authorization.created',
   data: {
-    authorization_code: 'AUTH_Z3DtABaUz3',
+    authorization_code: 'AUTH_Z***aUz3',
     active: false,
     last4: '8102',
     channel: 'direct_debit',
