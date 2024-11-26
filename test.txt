@@ -66,3 +66,96 @@ authorization_code: 'AUTH_Z3DtABaUz3',
     }
   }
 } 
+
+Received webhook data: {
+  event: 'direct_debit.authorization.active',
+  data: {
+    authorization_code: 'AUTH_Um7WUbcxMt',
+    active: true,
+    last4: '5670',
+    channel: 'direct_debit',
+    card_type: 'mandate',
+    bank: 'Fidelity Bank',
+    exp_month: 11,
+    exp_year: 2034,
+    country_code: 'NG',
+    brand: 'Fidelity Bank',
+    reusable: true,
+    signature: 'SIG_F0vFejho6dLPlr0EH1Bw',
+    account_name: 'IGBUNU EDIRIN AKPOSIBUKE',
+    integration: 1295342,
+    domain: 'live',
+    reference: 'oirg042ysq6vwz5',
+    customer: {
+      first_name: null,
+      last_name: null,
+      code: 'CUS_kyd59veust6ohia',
+      email: 'aedirin@gmail.com',
+      phone: null,
+      metadata: null,
+      risk_action: 'default'
+    }
+  }
+}
+
+Received webhook data: {
+  event: 'charge.success',
+  data: {
+    id: 4415608612,
+    domain: 'live',
+    status: 'success',
+    reference: 'jxt1utelajg6sgm',
+    amount: 10000,
+    message: 'madePayment',
+    gateway_response: 'Payment successful',
+    paid_at: '2024-11-26T09:47:22.000Z',
+    created_at: '2024-11-26T09:47:19.000Z',
+    channel: 'direct_debit',
+    currency: 'NGN',
+    ip_address: null,
+    metadata: '',
+    fees_breakdown: { amount: '150', formula: null, type: 'paystack' },
+    log: null,
+    fees: 150,
+    fees_split: null,
+    authorization: {
+      authorization_code: 'AUTH_Um7WUbcxMt',
+      bin: null,
+      last4: '5670',
+      exp_month: '11',
+      exp_year: '2034',
+      channel: 'direct_debit',
+      card_type: 'mandate',
+      bank: 'Fidelity Bank',
+      country_code: 'NG',
+      brand: 'Fidelity Bank',
+      reusable: true,
+      signature: 'SIG_F0vFejho6dLPlr0EH1Bw',
+      account_name: null
+    },
+    customer: {
+      id: 210412333,
+      first_name: null,
+      last_name: null,
+      email: 'aedirin@gmail.com',
+      customer_code: 'CUS_kyd59veust6ohia',
+      phone: null,
+      metadata: null,
+      risk_action: 'default',
+      international_format_phone: null
+    },
+    plan: {},
+    subaccount: {},
+    split: {},
+    order_id: null,
+    paidAt: '2024-11-26T09:47:22.000Z',
+    requested_amount: 10000,
+    pos_transaction_data: null,
+    source: {
+      type: 'api',
+      source: 'merchant_api',
+      entry_point: 'charge',
+      identifier: null
+    }
+  }
+}
